@@ -24,6 +24,7 @@ class CreateCustomersTable extends Migration
             $table->string('county');
             $table->string('postcode');
             $table->string('telno');
+            $table->string('gavatar');
             $table->timestamps();
         });
     }
