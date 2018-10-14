@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@index')->middleware('auth')->name('dashboard');
+
+Auth::routes();
+
+/**
+ * Disable Register Page
+ */
+//Route::get('/register', function() {
+//    return redirect('login');
+//});
+
+Route::get('/home', 'HomeController@index')->name('home');
