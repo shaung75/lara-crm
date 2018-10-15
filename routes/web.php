@@ -13,6 +13,16 @@
 
 Route::get('/', 'PagesController@index')->middleware('auth')->name('dashboard');
 
+/**
+ * Customer Routes
+ */
+Route::get('/customers', 'CustomerController@index')->name('customers');
+Route::post('/customers', 'CustomerController@store');
+Route::get('/customers/create', 'CustomerController@create')->name('customers.create');
+
+/**
+ * Auth Routes
+ */
 Auth::routes();
 
 /**
@@ -22,4 +32,4 @@ Auth::routes();
 //    return redirect('login');
 //});
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');

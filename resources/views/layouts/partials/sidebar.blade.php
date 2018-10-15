@@ -30,8 +30,16 @@
                 <li>
                     <a href="table.html">
                         <i class="pe-7s-note2"></i>
-                        <p>Table List</p>
+                        <p>Customers</p>
                     </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('customers.create') }}">
+                                <i class="pe-7s-user"></i>
+                                <p>New Customer</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="typography.html">
