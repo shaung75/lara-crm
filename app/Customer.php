@@ -20,4 +20,9 @@ class Customer extends Model
         'gravatar',
         'notes'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
