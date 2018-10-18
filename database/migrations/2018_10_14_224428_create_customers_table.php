@@ -19,13 +19,13 @@ class CreateCustomersTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email');
-            $table->string('company');
+            $table->string('company')->nullable();
             $table->string('address');
             $table->string('town');
             $table->string('county');
             $table->string('postcode');
             $table->string('telno');
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->string('gravatar');
             $table->timestamps();
         });

@@ -28,14 +28,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="table.html">
-                        <i class="pe-7s-note2"></i>
+                    <a href="{{ route('customers') }}">
+                        <i class="pe-7s-users"></i>
                         <p>Customers</p>
                     </a>
                     <ul>
                         <li>
                             <a href="{{ route('customers.create') }}">
-                                <i class="pe-7s-user"></i>
+                                <i class="pe-7s-add-user"></i>
                                 <p>New Customer</p>
                             </a>
                         </li>

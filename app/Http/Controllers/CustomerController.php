@@ -9,7 +9,8 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        return view('dashboard.customers');
+        $customers = Customer::all();
+        return view('dashboard.customers', compact('customers'));
     }
 
     public function create()
@@ -17,25 +18,57 @@ class CustomerController extends Controller
         return view('dashboard.customers.create');
     }
 
+    public function show(Customer $customer)
+    {
+        return view('dashboard.customers.show', compact('customer'));
+    }
+
+    public function update(Customer $customer)
+    {
+        $atts = request()->validate([
+            'company' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'town' => 'required',
+            'county' => 'required',
+            'postcode' => 'required',
+            'telno' => 'required',
+            'notes' => 'nullable'
+        ]);
+        $atts['user_id'] = auth()->user()->id;
+        $atts['gravatar'] = md5(strtolower(trim(request('email'))));
+        
+        $customer->update($atts);
+
+        return redirect()->route('customers');
+    }
+
+    public function edit (Customer $customer)
+    {
+        return view('dashboard.customers.edit', compact('customer'));
+    }
+
     public function store()
     {
-        $customer = new Customer();
+        $atts = request()->validate([
+            'company' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'town' => 'required',
+            'county' => 'required',
+            'postcode' => 'required',
+            'telno' => 'required',
+            'notes' => 'nullable'
+        ]);
+        $atts['user_id'] = auth()->user()->id;
+        $atts['gravatar'] = md5(strtolower(trim(request('email'))));
+        
+        Customer::create($atts);
 
-        $customer->user_id = auth()->user()->id;
-        $customer->company = request('company');
-        $customer->firstname = request('firstname');
-        $customer->lastname = request('lastname');
-        $customer->email = request('email');
-        $customer->address = request('address');
-        $customer->town = request('town');
-        $customer->county = request('county');
-        $customer->postcode = request('postcode');
-        $customer->telno = request('telno');
-        $customer->notes = request('notes');
-        $customer->gravatar = md5(strtolower(trim(request('email'))));
-
-        $customer->save();
-
-        return redirect()->route('customers');;
+        return redirect()->route('customers');
     }
 }
