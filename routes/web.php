@@ -19,7 +19,7 @@ Route::get('/', 'PagesController@index')->middleware('auth')->name('dashboard');
 Route::get('/customers', 'CustomerController@index')->name('customers');
 Route::post('/customers', 'CustomerController@store');
 Route::get('/customers/create', 'CustomerController@create')->name('customers.create');
-Route::get('/customers/{customer}', 'CustomerController@show');
+Route::get('/customers/{customer}', 'CustomerController@show')->middleware('customers.show');
 Route::patch('/customers/{customer}', 'CustomerController@update');
 Route::get('/customers/{customer}/edit', 'CustomerController@edit')->name('customers.update');
 
