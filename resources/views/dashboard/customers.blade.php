@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-12">
         
-        @if (count($customers) === 0 )
+        @if (count($user->customer) === 0 )
         
             <div class="alert alert-danger">You have no customers</div>
         
@@ -26,7 +26,7 @@
                     </thead>
                     <tbody>
 
-                        @foreach($customers as $customer)
+                        @foreach($user->customer as $customer)
                             <tr>
                                 <td><a href="/customers/{{ $customer->id }}">#{{ $customer->id }}</a></td>
                                 <td><a href="/customers/{{ $customer->id }}">{{ $customer->company }}</a></td>

@@ -2,7 +2,7 @@
 
 @section('content')
 
- <p>hi {{ $customer->firstname }}</p>
+ <p>hi {{ $customer->company }}</p>
 
  <p><a href="/customers/{{ $customer->id }}/edit">Edit</a></p>
 
