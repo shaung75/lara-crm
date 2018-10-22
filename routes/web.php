@@ -23,16 +23,8 @@ Route::get('/customers/{customer}', 'CustomerController@show')->middleware('cust
 Route::patch('/customers/{customer}', 'CustomerController@update')->middleware('customers');
 Route::get('/customers/{customer}/edit', 'CustomerController@edit')->name('customers.update')->middleware('customers');
 
+Route::get('/projects', 'ProjectController@index')->name('projects');
 /**
  * Auth Routes
  */
 Auth::routes();
-
-/**
- * Disable Register Page
- */
-//Route::get('/register', function() {
-//    return redirect('login');
-//});
-
-//Route::get('/home', 'HomeController@index')->name('home');

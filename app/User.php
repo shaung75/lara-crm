@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Customer::class);
     }
+
+    public function projects()
+    {
+        return $this->hasManyThrough('App\Project', 'App\Customer');
+    }
 }

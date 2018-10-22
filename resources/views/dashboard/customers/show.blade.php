@@ -4,7 +4,13 @@
 
 <div class="row">
     <div class="col-md-8">
-        <pre>{{ print_r($customer)}}</pre>
+        @if ($customer->projects->count())
+            @foreach ($customer->projects as $project)
+                <li>{{ $project->name }}</li>
+            @endforeach
+        @else
+            <div class="alert alert-danger">{{ $customer->company }} has no projects!</div>
+        @endif
     </div>
     <div class="col-md-4">
         <div class="card card-user">
