@@ -23,7 +23,15 @@
                             </ul>
                         </div>
                     @endif
-                    
+
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            <ul>
+                                <li>{{ session('status') }}</li>
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -115,22 +123,21 @@
             </div>
             <div class="content">
                 <div class="author">
-                     <a href="#">
                     <img class="avatar border-gray" src="https://www.gravatar.com/avatar/{{ $customer->gravatar }}" alt="{{ $customer->firstname}} {{ $customer->lastname }}"/>
 
-                      <h4 class="title">{{ $customer->company }}<br />
-                         <small>{{ $customer->firstname}} {{ $customer->lastname }}</small>
-                      </h4>
-                    </a>
+                    <h4 class="title">{{ $customer->company }}<br />
+                        <small>{{ $customer->firstname}} {{ $customer->lastname }}</small>
+                    </h4>
+                    <p><a href="mailto:{{ $customer->email }}">{{ $customer->email }}</a></p>
+                    <p>{{ $customer->address }}</p>
+                    <p>{{ $customer->town }}, {{ $customer->county }}, {{ $customer->postcode }}</p>
+                    <p>{{ $customer->telno }}</p>
                 </div>
-                <p class="description text-center">{{ $customer->notes }}</p>
+                <p class="description text-center">Notes: <br/>{{ $customer->notes }}</p>
             </div>
             <hr>
             <div class="text-center">
-                <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
-                <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
-                <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
-
+                <p><a href="/customers/{{ $customer->id }}" class="btn btn-default">View</a></p>
             </div>
         </div>
     </div>

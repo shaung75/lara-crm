@@ -48,8 +48,8 @@ class CustomerController extends Controller
         $atts['gravatar'] = md5(strtolower(trim(request('email'))));
         
         $customer->update($atts);
-
-        return redirect()->route('customers');
+        return back()->with('status', 'Profile updated!');
+        //return redirect()->route('customers');
     }
 
     public function edit (Customer $customer)
