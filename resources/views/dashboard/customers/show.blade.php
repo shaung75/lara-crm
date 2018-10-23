@@ -5,9 +5,26 @@
 <div class="row">
     <div class="col-md-8">
         @if ($customer->projects->count())
-            @foreach ($customer->projects as $project)
-                <li>{{ $project->name }}</li>
-            @endforeach
+            <div class="card">
+                <div class="content table-responsive table-full-width">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <th>ID</th>
+                            <th>Project Name</th>
+                        </thead>
+                        <tbody>
+
+                            @foreach($customer->projects as $project)
+                                <tr>
+                                    <td><a href="/projects/{{ $project->id }}">#{{ $project->id }}</a></td>
+                                    <td><a href="/projects/{{ $project->id }}">{{ $project->name }}</a></td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         @else
             <div class="alert alert-danger">{{ $customer->company }} has no projects!</div>
         @endif

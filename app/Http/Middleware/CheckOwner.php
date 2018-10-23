@@ -20,8 +20,27 @@ class CheckOwner
             
             $user_id = Auth::user()->id; // get user id
             
-            if($user_id != $request->route('customer')->user_id){
-                return redirect()->route('customers');
+            /**
+             * Check owner of Project
+             */
+            if($request->route('project')) 
+            {
+                $owner = \App\Project::find($request->route('project')->id);
+                
+                if($user_id != $owner->customer->user->id)
+                {
+                    return redirect()->route('projects');
+                }
+            }
+            
+            /**
+             * Check owner of Customer
+             */
+            if($request->route('customer'))
+            {
+                if($user_id != $request->route('customer')->user_id){
+                    return redirect()->route('customers');
+                }
             }
         }
         return $next($request);
