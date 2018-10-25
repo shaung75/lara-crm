@@ -16,7 +16,7 @@
 
             <ul class="nav">
                 <li class="active">
-                    <a href="dashboard.html">
+                    <a href="{{ route('dashboard') }}">
                         <i class="pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
@@ -32,14 +32,6 @@
                         <i class="pe-7s-users"></i>
                         <p>Customers</p>
                     </a>
-                    <ul>
-                        <li>
-                            <a href="{{ route('customers.create') }}">
-                                <i class="pe-7s-add-user"></i>
-                                <p>New Customer</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li>
                     <a href="typography.html">

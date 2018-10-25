@@ -13,6 +13,7 @@
 
         <div class="card">
             <div class="header">
+                <a href="{{ route('customers.create') }}" class="btn btn-default pull-right">Add Customer</a>
                 <h4 class="title">All Customers</h4>
                 <p class="category">Here are the money makers</p>
             </div>
