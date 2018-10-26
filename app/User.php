@@ -37,4 +37,9 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough('App\Project', 'App\Customer');
     }
+
+    public function invoices()
+    {
+        return $this->hasManyThrough('App\Invoice', 'App\Customer');
+    }
 }

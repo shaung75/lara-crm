@@ -29,6 +29,11 @@ Route::middleware('auth')->group(function() {
     Route::get('/projects/create', 'ProjectController@create')->name('projects.create');
     Route::get('/projects/{project}', 'ProjectController@show')->name('project')->middleware('checkOwner');  
     Route::delete('/projects/{project}', 'ProjectController@destroy')->name('project.delete')->middleware('checkOwner');
+
+    Route::get('/invoices', 'InvoiceController@index')->name('invoices');
+    Route::post('/invoices', 'InvoiceController@store');
+    Route::get('/invoces/create', 'InvoiceController@create')->name('invoices.create');
+    Route::get('/invoices/{invoice}', 'InvoiceController@show')->name('invoice')->middleware('checkOwner');
 });
 
 /**

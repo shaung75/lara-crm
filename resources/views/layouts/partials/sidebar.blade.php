@@ -33,6 +33,12 @@
                         <p>Projects</p>
                     </a>
                 </li>
+                <li class="@if (Request::is('invoices*')) {{'active'}} @endif">
+                    <a href="{{ route('invoices') }}">
+                        <i class="pe-7s-cash"></i>
+                        <p>Invoices</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

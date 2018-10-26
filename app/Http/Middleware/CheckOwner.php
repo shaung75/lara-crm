@@ -32,6 +32,19 @@ class CheckOwner
                     return redirect()->route('projects');
                 }
             }
+
+            /**
+             * Check owner of Invoice
+             */
+            if($request->route('invoice')) 
+            {
+                $owner = \App\Invoice::find($request->route('invoice')->id);
+                
+                if($user_id != $owner->customer->user->id)
+                {
+                    return redirect()->route('invoices');
+                }
+            }
             
             /**
              * Check owner of Customer

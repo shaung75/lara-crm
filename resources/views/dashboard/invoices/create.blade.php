@@ -4,7 +4,7 @@
 
 <p class="small">
     <a href="{{ route('dashboard') }}">Dashboard</a> | 
-    <a href="{{ route('projects') }}">Projects</a> | 
+    <a href="{{ route('invoices') }}">Invoices</a> | 
     Create
 </p>
 
@@ -12,10 +12,10 @@
     <div class="col-md-8">
         <div class="card">
             <div class="header">
-                <h4 class="title">Add Project</h4>
+                <h4 class="title">Add Invoice</h4>
             </div>
             <div class="content">
-                <form method="POST" action="/projects">
+                <form method="POST" action="/invoices">
                     
                     @csrf
     
@@ -45,25 +45,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Project</label>
-                                <input type="text" class="form-control" name="name" placeholder="Project Name" value="{{ old('name') }}">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea rows="5" class="form-control" name="description" placeholder="Project description">{{ old('description') }}</textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-info btn-fill pull-right">Add Project</button>
+                    <button type="submit" class="btn btn-info btn-fill pull-right">Add Invoice</button>
                     <div class="clearfix"></div>
                 </form>
             </div>
