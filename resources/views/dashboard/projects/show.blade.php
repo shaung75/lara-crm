@@ -2,13 +2,24 @@
 
 @section('content')
 
+<p class="small">
+    <a href="{{ route('dashboard') }}">Dashboard</a> | 
+    <a href="{{ route('customers') }}">Customers</a> | 
+    <a href="{{ route('customer', $project->customer->id) }}">{{ $project->customer->company }}</a> | 
+    {{ $project->name }}
+</p>
+
 <div class="row">
     <div class="col-md-8">
         <div class="card">
             <div class="header">
                 <h4 class="title">{{ $project->name }}</h4>
+            </div>
+
+            <div class="content">
                 <p class="category">{{ $project->description }}</p>
             </div>
+
         </div>
     </div>
     <div class="col-md-4">

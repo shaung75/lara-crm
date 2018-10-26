@@ -2,8 +2,13 @@
 
 @section('content')
 
+<p class="small">
+    <a href="{{ route('dashboard') }}">Dashboard</a> | 
+    Projects
+</p>
+
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
         
         @if (count($user->projects) === 0 )
         
@@ -23,6 +28,7 @@
                         <th>ID</th>
                         <th>Project Name</th>
                         <th>Customer</th>
+                        <th></th>
                     </thead>
                     <tbody>
 
@@ -31,6 +37,13 @@
                                 <td><a href="/projects/{{ $project->id }}">#{{ $project->id }}</a></td>
                                 <td><a href="/projects/{{ $project->id }}">{{ $project->name }}</a></td>
                                 <td><a href="/customers/{{ $project->customer->id}}">{{ $project->customer->company }}</a></td>
+                                <td>
+                                    <form method="POST" action="{{ route('project.delete', $project->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-default" onclick="return confirm('Are you sure?')">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
 

@@ -2,15 +2,25 @@
 
 @section('content')
 
+<p class="small">
+    <a href="{{ route('dashboard') }}">Dashboard</a> | <a href="{{ route('customers') }}">Customers</a> | {{ $customer->company }}
+</p>
+
 <div class="row">
     <div class="col-md-8">
         @if ($customer->projects->count())
             <div class="card">
+                <div class="header">
+                    <a href="/customers/{{ $customer->id }}/projects/create" class="btn btn-default pull-right">Add Project</a>
+                    <h4 class="title">Projects</h4>
+                    <p class="category">Projects for {{ $customer->company }}</p>
+                </div>
                 <div class="content table-responsive table-full-width">
                     <table class="table table-hover table-striped">
                         <thead>
                             <th>ID</th>
                             <th>Project Name</th>
+                            <th></th>
                         </thead>
                         <tbody>
 
@@ -18,6 +28,13 @@
                                 <tr>
                                     <td><a href="/projects/{{ $project->id }}">#{{ $project->id }}</a></td>
                                     <td><a href="/projects/{{ $project->id }}">{{ $project->name }}</a></td>
+                                    <td>
+                                        <form method="POST" action="{{ route('project.delete', $project->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-default" onclick="return confirm('Are you sure?')">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
 
@@ -27,6 +44,7 @@
             </div>
         @else
             <div class="alert alert-danger">{{ $customer->company }} has no projects!</div>
+            <p><a href="/customers/{{ $customer->id }}/projects/create" class="btn btn-default">Add a Project</a></p>
         @endif
     </div>
     <div class="col-md-4">

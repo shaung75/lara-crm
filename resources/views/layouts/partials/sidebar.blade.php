@@ -15,52 +15,22 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li class="@if (Request::is('/')) {{'active'}} @endif">
                     <a href="{{ route('dashboard') }}">
                         <i class="pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li>
-                    <a href="user.html">
-                        <i class="pe-7s-user"></i>
-                        <p>User Profile</p>
-                    </a>
-                </li>
-                <li>
+                <li class="@if (Request::is('customers*')) {{'active'}} @endif">
                     <a href="{{ route('customers') }}">
                         <i class="pe-7s-users"></i>
                         <p>Customers</p>
                     </a>
                 </li>
-                <li>
-                    <a href="typography.html">
+                <li class="@if (Request::is('projects*')) {{'active'}} @endif">
+                    <a href="{{ route('projects') }}">
                         <i class="pe-7s-news-paper"></i>
-                        <p>Typography</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons.html">
-                        <i class="pe-7s-science"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="maps.html">
-                        <i class="pe-7s-map-marker"></i>
-                        <p>Maps</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="notifications.html">
-                        <i class="pe-7s-bell"></i>
-                        <p>Notifications</p>
-                    </a>
-                </li>
-                <li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="pe-7s-rocket"></i>
-                        <p>Upgrade to PRO</p>
+                        <p>Projects</p>
                     </a>
                 </li>
             </ul>

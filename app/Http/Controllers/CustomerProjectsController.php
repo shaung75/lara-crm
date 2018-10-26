@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Project;
-use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
-class ProjectController extends Controller
+use \App\Customer;
+use \App\Project;
+class CustomerProjectsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +14,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-
-        return view('dashboard.projects', compact('user'));
+        //
     }
 
     /**
@@ -26,12 +22,9 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Customer $customer)
     {
-        $user = Auth::user();
-        $customers = $user->customer;
-
-        return view('dashboard.projects.create', compact('user', 'customers'));
+        return view('dashboard.customers.projects.create', compact('customer'));
     }
 
     /**
@@ -40,13 +33,13 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Customer $customer)
     {
         $atts = request()->validate([
             'name' => 'required',
-            'description' => 'required',
-            'customer_id' => 'required'
+            'description' => 'required'
         ]);
+        $atts['customer_id'] = $customer->id;
         
         $project = Project::create($atts);
 
@@ -56,21 +49,21 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Project  $project
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show($id)
     {
-        return view('dashboard.projects.show', compact('project'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Project  $project
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit($id)
     {
         //
     }
@@ -79,10 +72,10 @@ class ProjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Project  $project
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -90,17 +83,11 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Project  $project
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy($id)
     {
-        $user = Auth::user();
-
-        $project->delete();
-
-        //return view('dashboard.projects', compact('user'));
-        //return redirect()->route('projects');
-        return back();
+        //
     }
 }

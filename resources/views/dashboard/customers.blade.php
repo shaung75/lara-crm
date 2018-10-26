@@ -2,8 +2,12 @@
 
 @section('content')
 
+<p class="small">
+    <a href="{{ route('dashboard') }}">Dashboard</a> | Customers
+</p>
+
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
         
         @if (count($user->customer) === 0 )
         
