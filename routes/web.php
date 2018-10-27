@@ -32,8 +32,11 @@ Route::middleware('auth')->group(function() {
 
     Route::get('/invoices', 'InvoiceController@index')->name('invoices');
     Route::post('/invoices', 'InvoiceController@store');
-    Route::get('/invoces/create', 'InvoiceController@create')->name('invoices.create');
+    Route::get('/invoices/create', 'InvoiceController@create')->name('invoices.create');
     Route::get('/invoices/{invoice}', 'InvoiceController@show')->name('invoice')->middleware('checkOwner');
+    Route::patch('/invoices/{invoice}', 'InvoiceController@update')->middleware('checkOwner');
+    Route::patch('/invoices/{invoice}/lock', 'InvoiceController@update')->middleware('checkOwner');
+    Route::post('/invoices/{invoice}/items/create', 'InvoiceItemController@store')->middleware('checkOwner');
 });
 
 /**

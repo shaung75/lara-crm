@@ -4,7 +4,7 @@
 
 <p class="small">
     <a href="{{ route('dashboard') }}">Dashboard</a> | 
-    <a href="{{ route('customers') }}">Customers</a> | 
+    <a href="{{ route('invoices') }}">Invoices</a> | 
     <a href="{{ route('customer', $invoice->customer->id) }}">{{ $invoice->customer->company }}</a> | 
     Invoice #{{ $invoice->id }}
 </p>
@@ -14,6 +14,80 @@
         <div class="card">
             <div class="header">
                 <h4 class="title">Invoice #{{ $invoice->id }}</h4>
+                <p class="category">{{ $invoice->customer->company }}</p>
+            </div>
+
+            <div class="content">
+                @if($invoice->items->count())
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <th>Line Item</th>
+                            <th>Qty</th>
+                            <th>Value</th>
+                            <th>Total</th>
+                        </thead>
+                        <tbody>
+
+                        @foreach ($invoice->items as $item)
+                            <tr>
+                                <td>{{ $item->lineItem }}</td>
+                                <td>{{ $item->qty }}</td>
+                                <td>&pound;{{ number_format($item->amount, 2, '.', ',') }}</td>
+                                <td>&pound;{{ number_format($item->total(), 2, '.', ',') }}</td>
+                            </tr>
+                        @endforeach
+                        
+                        </tbody>
+                    </table>
+
+                    <h4>Total: &pound;{{ number_format($invoice->total(), 2, '.', ',') }}</h4>
+                @endif
+
+                @if(!$invoice->locked)
+                    <h4>Add Item</h4>
+                    
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    
+                    <form class="form-inline" action="/invoices/{{ $invoice->id }}/items/create" method="POST">
+                        @csrf
+
+                        <div class="form-group">
+                            <label class="sr-only" for="lineItem">Line Item</label>
+                            <input type="text" class="form-control" id="lineItem" name="lineItem" placeholder="Line Item">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="lineItem">Line Item</label>
+                            <input type="number" step="0.01" class="form-control" id="qty" name="qty" placeholder="Qty">
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">£</div>
+                                <input type="number" step="0.01" class="form-control" id="amount" name="amount" placeholder="Value">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default">Add Item</button>
+                    </form>
+                @endif
+
+                <hr>
+
+                <form method="POST" action="/invoices/{{ $invoice->id }}/lock">
+                    @method('PATCH')
+                    @csrf
+
+                    <input type="hidden" name="updateType" value="lock">
+                    <input type="hidden" name="locked" value="{{ $invoice->locked ? '0' : '1' }}">
+
+                    <button type="submit" class="btn btn-default" onclick="return confirm('Are you sure?')">{{ $invoice->locked ? 'Unlock' : 'Lock' }}</button>
+                </form>                
             </div>
         </div>
     </div>

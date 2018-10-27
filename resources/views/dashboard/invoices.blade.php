@@ -28,18 +28,32 @@
                 <table class="table table-hover table-striped">
                     <thead>
                         <th>Paid</th>
-                        <th>ID</th>
-                        <th>Value</th>
+                        <th>Locked</th>
+                        <th class="text-center">Inoice No</th>
                         <th>Customer</th>
+                        <th>Value</th>
                     </thead>
                     <tbody>
 
                         @foreach($user->invoices as $invoice)
                             <tr>
-                                <td></td>
-                                <td><a href="/invoices/{{ $invoice->id }}">{{ $project->id }}</a></td>
-                                <td></td>
-                                <td><a href="/customers/{{ $project->customer->id}}">{{ $project->customer->company }}</a></td>
+                                <td>
+                                    <form method="POST" action="/invoices/{{ $invoice->id }}">
+                                        @method('PATCH')
+                                        @csrf
+
+                                        <input type="hidden" name="updateType" value="paid">
+                                        
+                                        <div class="checkbox">
+                                            <input id="checkbox{{ $invoice->id }}" type="checkbox" onChange="this.form.submit()" name="paid" {{ $invoice->paid ? 'checked' : '' }}>
+                                            <label for="checkbox{{ $invoice->id }}"></label>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td>{!! $invoice->locked ? '<i class="pe-7s-check"></i>' : '' !!}</td>
+                                <td class="text-center"><a href="/invoices/{{ $invoice->id }}">#{{ $invoice->id }}</a></td>
+                                <td><a href="/customers/{{ $invoice->customer->id}}">{{ $invoice->customer->company }}</a></td>
+                                <td>&pound;{{ number_format($invoice->total(), 2, '.', ',') }}</td>
                             </tr>
                         @endforeach
 

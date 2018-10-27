@@ -79,7 +79,19 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
-        //
+        if($request->updateType == 'paid')
+        {
+            $invoice->update([
+                'paid' => request()->has('paid')
+            ]);
+        } elseif($request->updateType == 'lock')
+        {
+            $invoice->update([
+                'locked' => request()->locked
+            ]);
+        }
+
+        return back();
     }
 
     /**
