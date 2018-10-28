@@ -20,7 +20,7 @@
                             </td>
                             
                             <td style="text-align: right">
-                                <h1>INVOICE</h1>
+                                <h1>{{ $invoice->total() >= 0 ? 'INVOICE' : 'CREDIT NOTE' }}</h1>
                             </td>
                         </tr>
                     </table>
@@ -66,7 +66,7 @@
 
             <tr>
                 <td colspan="3" style="padding-left: 0px;">
-                    <table style="width: 50%">
+                    <table>
                         <tr class="heading">
                             <td style="width: 50%;">Customer</td>
                         </tr>
@@ -75,7 +75,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            {{ $invoice->customer->firstname }} {{ $invoice->customer->firstname }}<br>
+                                            {{ $invoice->customer->firstname }} {{ $invoice->customer->lastname }}<br>
                                             {{ $invoice->customer->company }}<br>
                                             {{ $invoice->customer->address }}, {{ $invoice->customer->town }}<br>
                                             {{ $invoice->customer->county }}<br>
@@ -86,6 +86,11 @@
                                         </td>
                                     </tr>
                                 </table>
+                            </td>
+                            <td>
+                                @if($invoice->paid)
+                                    <img src="/img/paid.png" style="height: 120px; float:right;">
+                                @endif
                             </td>
                         </tr>
                     </table>   

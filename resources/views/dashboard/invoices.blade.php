@@ -29,40 +29,50 @@
                 <p><small>Show: <a href="{{ $route == 'invoices' ? route('invoices.unpaid') : route('invoices') }}">{{ $route == 'invoices' ? 'Unpaid' : 'All' }}</a></small></p>
             </div>
             <div class="content table-responsive table-full-width">
-                <table class="table table-hover table-striped">
-                    <thead>
-                        <th>Paid</th>
-                        <th class="text-center">Locked &amp; Sent</th>
-                        <th class="text-center">Inoice No</th>
-                        <th>Customer</th>
-                        <th>Value</th>
-                    </thead>
-                    <tbody>
+                @if($invoices->count())
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <th>Paid</th>
+                            <th class="text-center">Locked &amp; Sent</th>
+                            <th class="text-center">Inoice No</th>
+                            <th>Customer</th>
+                            <th>Value</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
 
-                        @foreach($invoices as $invoice)
-                            <tr>
-                                <td>
-                                    <form method="POST" action="/invoices/{{ $invoice->id }}">
-                                        @method('PATCH')
-                                        @csrf
+                            @foreach($invoices as $invoice)
+                                <tr>
+                                    <td>
+                                        <form method="POST" action="/invoices/{{ $invoice->id }}">
+                                            @method('PATCH')
+                                            @csrf
 
-                                        <input type="hidden" name="updateType" value="paid">
-                                        
-                                        <div class="checkbox">
-                                            <input id="checkbox{{ $invoice->id }}" type="checkbox" onChange="this.form.submit()" name="paid" {{ $invoice->paid ? 'checked' : '' }}>
-                                            <label for="checkbox{{ $invoice->id }}"></label>
-                                        </div>
-                                    </form>
-                                </td>
-                                <td class="text-center">{!! $invoice->locked ? '<i class="pe-7s-check"></i>' : '' !!}</td>
-                                <td class="text-center"><a href="/invoices/{{ $invoice->id }}">#{{ $invoice->id }}</a></td>
-                                <td><a href="/customers/{{ $invoice->customer->id}}">{{ $invoice->customer->company }}</a></td>
-                                <td>&pound;{{ number_format($invoice->total(), 2, '.', ',') }}</td>
-                            </tr>
-                        @endforeach
+                                            <input type="hidden" name="updateType" value="paid">
+                                            
+                                            <div class="checkbox">
+                                                <input id="checkbox{{ $invoice->id }}" type="checkbox" onChange="this.form.submit()" name="paid" {{ $invoice->paid ? 'checked' : '' }}>
+                                                <label for="checkbox{{ $invoice->id }}"></label>
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <td class="text-center">{!! $invoice->locked ? '<i class="pe-7s-check"></i>' : '' !!}</td>
+                                    <td class="text-center"><a href="/invoices/{{ $invoice->id }}">#{{ $invoice->id }}</a></td>
+                                    <td><a href="/customers/{{ $invoice->customer->id}}">{{ $invoice->customer->company }}</a></td>
+                                    <td>&pound;{{ number_format($invoice->total(), 2, '.', ',') }}</td>
+                                    <td><a href="{{ route('invoice.print', $invoice->id) }}" class="btn btn-default">Print</a></td>
+                                </tr>
+                            @endforeach
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                @else
+                    <div class="content">
+                        <div class="alert alert-success">
+                            <p>All Invoices Paid Up</p>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
         
