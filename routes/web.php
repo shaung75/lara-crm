@@ -31,9 +31,11 @@ Route::middleware('auth')->group(function() {
     Route::delete('/projects/{project}', 'ProjectController@destroy')->name('project.delete')->middleware('checkOwner');
 
     Route::get('/invoices', 'InvoiceController@index')->name('invoices');
+    Route::get('/invoices/unpaid', 'InvoiceController@index')->name('invoices.unpaid');
     Route::post('/invoices', 'InvoiceController@store');
     Route::get('/invoices/create', 'InvoiceController@create')->name('invoices.create');
     Route::get('/invoices/{invoice}', 'InvoiceController@show')->name('invoice')->middleware('checkOwner');
+    Route::get('/invoices/{invoice}/print', 'InvoiceController@print')->name('invoice.print')->middleware('checkOwner');
     Route::patch('/invoices/{invoice}', 'InvoiceController@update')->middleware('checkOwner');
     Route::patch('/invoices/{invoice}/lock', 'InvoiceController@update')->middleware('checkOwner');
     Route::post('/invoices/{invoice}/items/create', 'InvoiceItemController@store')->middleware('checkOwner');

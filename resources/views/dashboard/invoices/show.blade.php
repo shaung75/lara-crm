@@ -13,11 +13,13 @@
     <div class="col-md-8">
         <div class="card">
             <div class="header">
+                <a href="{{ route('invoice.print', $invoice->id) }}" class="btn btn-default pull-right">Print Invoice</a>
                 <h4 class="title">Invoice #{{ $invoice->id }}</h4>
                 <p class="category">{{ $invoice->customer->company }}</p>
             </div>
 
             <div class="content">
+                <p>Date: <span class="category">{{ $invoice->created_at->format('d-m-Y') }}</span></p>
                 @if($invoice->items->count())
                     <table class="table table-hover table-striped">
                         <thead>
@@ -86,8 +88,8 @@
                     <input type="hidden" name="updateType" value="lock">
                     <input type="hidden" name="locked" value="{{ $invoice->locked ? '0' : '1' }}">
 
-                    <button type="submit" class="btn btn-default" onclick="return confirm('Are you sure?')">{{ $invoice->locked ? 'Unlock' : 'Lock' }}</button>
-                </form>                
+                    <button type="submit" class="btn btn-default" onclick="return confirm('Are you sure?')">{{ $invoice->locked ? 'Unlock' : 'Lock & Mark as Sent' }}</button>
+                </form>              
             </div>
         </div>
     </div>

@@ -20,22 +20,26 @@
 
         <div class="card">
             <div class="header">
+                <a href="{{ route('invoices.create') }}" class="btn btn-default pull-right">Add Invoice</a>
                 <h4 class="title">All Invoices</h4>
                 <p class="category">Show me the money</p>
             </div>
 
+            <div class="content">
+                <p><small>Show: <a href="{{ $route == 'invoices' ? route('invoices.unpaid') : route('invoices') }}">{{ $route == 'invoices' ? 'Unpaid' : 'All' }}</a></small></p>
+            </div>
             <div class="content table-responsive table-full-width">
                 <table class="table table-hover table-striped">
                     <thead>
                         <th>Paid</th>
-                        <th>Locked</th>
+                        <th class="text-center">Locked &amp; Sent</th>
                         <th class="text-center">Inoice No</th>
                         <th>Customer</th>
                         <th>Value</th>
                     </thead>
                     <tbody>
 
-                        @foreach($user->invoices as $invoice)
+                        @foreach($invoices as $invoice)
                             <tr>
                                 <td>
                                     <form method="POST" action="/invoices/{{ $invoice->id }}">
@@ -50,7 +54,7 @@
                                         </div>
                                     </form>
                                 </td>
-                                <td>{!! $invoice->locked ? '<i class="pe-7s-check"></i>' : '' !!}</td>
+                                <td class="text-center">{!! $invoice->locked ? '<i class="pe-7s-check"></i>' : '' !!}</td>
                                 <td class="text-center"><a href="/invoices/{{ $invoice->id }}">#{{ $invoice->id }}</a></td>
                                 <td><a href="/customers/{{ $invoice->customer->id}}">{{ $invoice->customer->company }}</a></td>
                                 <td>&pound;{{ number_format($invoice->total(), 2, '.', ',') }}</td>

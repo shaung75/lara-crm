@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
 {
@@ -13,11 +14,19 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
+        $route = $request->route()->uri;
 
-        return view('dashboard.invoices', compact('user'));
+        if($route == 'invoices')
+        {
+            $invoices = $user->invoices;    
+        } else {
+            $invoices = $user->invoices->where('paid', 0);
+        }
+        
+        return view('dashboard.invoices', compact('user', 'invoices', 'route'));
     }
 
     /**
@@ -57,6 +66,17 @@ class InvoiceController extends Controller
     public function show(Invoice $invoice)
     {
         return view('dashboard.invoices.show', compact('invoice'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Invoice  $invoice
+     * @return \Illuminate\Http\Response
+     */
+    public function print(Invoice $invoice)
+    {
+        return view('dashboard.invoices.print', compact('invoice'));
     }
 
     /**
