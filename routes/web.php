@@ -12,7 +12,7 @@
 */
 
 Route::middleware('auth')->group(function() {
-    Route::get('/', 'PagesController@index')->middleware('auth')->name('dashboard');
+    Route::get('/dashboard', 'PagesController@index')->middleware('auth')->name('dashboard');
 
     Route::get('/customers', 'CustomerController@index')->name('customers');
     Route::post('/customers', 'CustomerController@store');
