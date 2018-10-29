@@ -35,7 +35,7 @@
                                 <label>Customer</label>
                                 <select class="form-control" name="customer_id">
                                     <option disabled="" selected="">Select a customer</option>
-                                    @foreach ($customers as $customer)
+                                    @foreach ($customers->sortBy('company') as $customer)
                                         <option value="{{ $customer->id }}">
                                             {{ $customer->company }}
                                         </option>
