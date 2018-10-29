@@ -48,6 +48,12 @@
         @endif
     </div>
     <div class="col-md-4">
+        <div class="card">
+            <div class="header">
+                <a href="{{ route('customers.invoices', $customer->id) }}" class="btn btn-default pull-right">Invoices</a>
+                <h4 class="title" style="line-height: 2.2em">Account Balance: &pound;{{ number_format($customer->balance(), 2, '.', ',') }}</h4>
+            </div>
+        </div>
         <div class="card card-user">
             <div class="image">
                 <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>

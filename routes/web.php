@@ -20,6 +20,9 @@ Route::middleware('auth')->group(function() {
     Route::get('/customers/{customer}', 'CustomerController@show')->name('customer')->middleware('checkOwner');
     Route::patch('/customers/{customer}', 'CustomerController@update')->middleware('checkOwner');
     Route::get('/customers/{customer}/edit', 'CustomerController@edit')->name('customers.update')->middleware('checkOwner');
+    Route::get('/customers/{customer}/invoices', 'CustomerController@invoices')->name('customers.invoices')->middleware('checkOwner');
+    Route::get('/customers/{customer}/invoices/unpaid', 'CustomerController@invoices')->name('customers.invoices.unpaid')->middleware('checkOwner');
+    Route::get('/customers/{customer}/invoices/create', 'CustomerController@invoicesCreate')->name('customers.invoices.create')->middleware('checkOwner');
 
     Route::get('/customers/{customer}/projects/create', 'CustomerProjectsController@create')->middleware('checkOwner');
     Route::post('/customers/{customer}/projects', 'CustomerProjectsController@store');

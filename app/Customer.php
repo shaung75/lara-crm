@@ -35,4 +35,30 @@ class Customer extends Model
     {
         return $this->hasMany(Invoice::class);
     }
+
+    public function balance()
+    {
+        $invoices = $this->invoices->where('paid', 0);
+        $balance = 0;
+        
+        foreach ($invoices as $invoice)
+        {
+            $balance += $invoice->total();
+        }
+
+        return $balance;
+    }
+
+    public function totalValue()
+    {
+        $invoices = $this->invoices;
+        $value = 0;
+        
+        foreach ($invoices as $invoice)
+        {
+            $value += $invoice->total();
+        }
+
+        return $value;
+    }
 }

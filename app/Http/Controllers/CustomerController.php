@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -77,5 +78,30 @@ class CustomerController extends Controller
         Customer::create($atts);
 
         return redirect()->route('customers');
+    }
+
+    public function invoices (Request $request, Customer $customer)
+    {
+        $route = $request->route()->uri;
+
+        if($route == 'customers/{customer}/invoices')
+        {
+            $invoices = $customer->invoices;    
+        } else {
+            $invoices = $customer->invoices->where('paid', 0);
+        }
+
+        return view('dashboard.customers.invoices.show', compact('customer', 'route', 'invoices'));
+    }
+
+    public function invoicesCreate (Customer $customer)
+    {
+        $invoice = new Invoice;
+
+        $invoice->customer_id = $customer->id;
+
+        $invoice->save();
+        
+        return redirect()->route('invoice', ['id' => $invoice->id]);
     }
 }
