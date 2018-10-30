@@ -8,7 +8,7 @@ class PagesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        //
     }
     
     /**
@@ -19,6 +19,11 @@ class PagesController extends Controller
     public function index()
     {
         return view('dashboard.index');
+    }
+
+    public function home()
+    {
+        return view('public.index');
     }
 
     /**

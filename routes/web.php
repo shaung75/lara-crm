@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/', 'PagesController@home')->name('home');
+
 Route::middleware('auth')->group(function() {
     Route::get('/dashboard', 'PagesController@index')->middleware('auth')->name('dashboard');
 
