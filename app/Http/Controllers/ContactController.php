@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+use App\Mail\ContactFormMail;
 use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -50,6 +52,8 @@ class ContactController extends Controller
         }
         
         Contact::create($request->all());
+        
+        Mail::to('shaung75@gmail.com')->send(new ContactFormMail($request->all()));
 
         return redirect('/#contact')->with('success', 'Your message has been sent, I\'ll be in touch soon!');;
     }
