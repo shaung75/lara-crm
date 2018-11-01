@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact;
+use Validator;
 use Illuminate\Http\Request;
 
-class PagesController extends Controller
+class ContactController extends Controller
 {
-    public function __construct()
-    {
-        //
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -18,32 +15,7 @@ class PagesController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
-    }
-
-    public function home()
-    {
-        return view('public.index');
-    }
-
-    public function freelance()
-    {
-        return view('public.freelance');
-    }
-
-    public function terms()
-    {
-        return view('public.terms');
-    }
-
-    public function privacy()
-    {
-        return view('public.privacy');
-    }
-
-    public function pay()
-    {
-        return view('public.pay');
+        //
     }
 
     /**
@@ -64,16 +36,31 @@ class PagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'telephone' => 'required',
+            'message' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/#contact')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        
+        Contact::create($request->all());
+
+        return redirect('/#contact')->with('success', 'Your message has been sent, I\'ll be in touch soon!');;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Contact $contact)
     {
         //
     }
@@ -81,10 +68,10 @@ class PagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Contact $contact)
     {
         //
     }
@@ -93,10 +80,10 @@ class PagesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Contact $contact)
     {
         //
     }
@@ -104,10 +91,10 @@ class PagesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Contact $contact)
     {
         //
     }
