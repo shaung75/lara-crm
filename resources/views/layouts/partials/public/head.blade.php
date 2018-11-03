@@ -48,6 +48,9 @@
               <a class="nav-link js-scroll-trigger" href="/#contact">Contact</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{{ route('freelance') }}">Freelance</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link btn" href="{{ route('login') }}">Client Login</a>
             </li>
           </ul>

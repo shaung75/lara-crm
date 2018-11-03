@@ -13,11 +13,14 @@
         @if (count($user->projects) === 0 )
         
             <div class="alert alert-danger">You have no projects</div>
+
+            <a href="{{ route('projects.create') }}" class="btn btn-default">Add Project</a>
         
         @else 
 
         <div class="card">
             <div class="header">
+                <a href="{{ route('projects.create') }}" class="btn btn-default pull-right">Add Project</a>
                 <h4 class="title">All Projects</h4>
                 <p class="category">Stuff to work on</p>
             </div>

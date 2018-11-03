@@ -12,6 +12,8 @@
         @if (count($user->customer) === 0 )
         
             <div class="alert alert-danger">You have no customers</div>
+
+            <a href="{{ route('customers.create') }}" class="btn btn-default">Add Customer</a>
         
         @else 
 
