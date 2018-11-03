@@ -54,4 +54,4 @@ Route::middleware('auth')->group(function() {
 /**
  * Auth Routes
  */
-Auth::routes();
+Auth::routes(['verify' => true, 'register' => false]);
