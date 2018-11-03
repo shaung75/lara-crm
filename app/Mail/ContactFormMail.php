@@ -30,6 +30,6 @@ class ContactFormMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->user['email'])->view('emails.contactform');
+        return $this->from('shaung75@gmail.com')->view('emails.contactform');
     }
 }
