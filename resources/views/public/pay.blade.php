@@ -19,6 +19,21 @@
                                     @endforeach
                                 </div>
                             @endif
+                            
+                            @if ($message = Session::get('error'))
+                            <div class="alert alert-danger alert-block">
+                                <button type="button" class="close" data-dismiss="alert">×</button> 
+                                {{ $message }}
+                            </div>
+                            @endif
+                            
+                            @if ($message = Session::get('success'))
+                            <div class="alert alert-success alert-block">
+                                <button type="button" class="close" data-dismiss="alert">×</button> 
+                                {{ $message }}
+                            </div>
+                            @endif
+
                             <div class="form-group row">
                                 <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('Invoice #') }}</label>
 

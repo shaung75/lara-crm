@@ -30,7 +30,8 @@
                                         </div>
                                     @else
                                     {{-- If the invoice hasnt been paid --}}
-                                        <form action="/charge" method="post" id="payment-form">
+                                        <form action="/pay/{{ $invoice->id }}" method="post" id="payment-form">
+                                            @csrf
                                             <div class="form-group row">
                                                 <label for="card-element" class="col-sm-4 col-form-label text-md-right">
                                                     Credit or debit card

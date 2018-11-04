@@ -55,7 +55,7 @@ class ContactController extends Controller
         
         Mail::to('shaung75@gmail.com')->send(new ContactFormMail($request->all()));
 
-        return redirect('/#contact')->with('success', 'Your message has been sent, I\'ll be in touch soon!');;
+        return redirect('/#contact')->with('success', 'Your message has been sent, I\'ll be in touch soon!');
     }
 
     /**

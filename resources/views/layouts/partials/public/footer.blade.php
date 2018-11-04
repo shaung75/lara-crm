@@ -17,7 +17,7 @@
     <!-- Custom scripts for this template -->
     <script src="/js/creative.min.js"></script>
     <script>
-      var stripe = Stripe('{{ $_ENV['STRIPE_PUBLISH'] }}');
+      var stripe = Stripe('{{ env('STRIPE_PUBLISH') }}');
       var elements = stripe.elements();
       // Custom styling can be passed to options when creating an Element.
       var style = {
