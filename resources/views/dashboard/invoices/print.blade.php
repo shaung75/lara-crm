@@ -135,7 +135,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <p>I accept paymet by either Bank Transfer or cash. Paypal can be accepted with an additional charge.</p>
+                            <p>I accept paymet by either Card, Bank Transfer or cash.</p>
+                            <p>Card Payments: <a href="https://www.shaungill.co.uk/pay">https://www.shaungill.co.uk/pay</a></p>
                             <p><strong>
                                 Barclays Bank<br>
                                 20-25-36<br>
