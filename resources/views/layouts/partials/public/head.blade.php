@@ -28,11 +28,6 @@
     <!-- Stripe integration bits -->
     <script src="https://js.stripe.com/v3/"></script>
 
-    <script>
-      var stripe = Stripe('{{ $_ENV['STRIPE_PUBLISH'] }}');
-      var elements = stripe.elements();
-    </script>
-
   </head>
 
   <body id="page-top">
