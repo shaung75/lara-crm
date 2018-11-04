@@ -16,6 +16,7 @@ Route::get('/freelance', 'PagesController@freelance')->name('freelance');
 Route::get('/terms', 'PagesController@terms')->name('terms');
 Route::get('/privacy', 'PagesController@privacy')->name('privacy');
 Route::get('/pay', 'PagesController@pay')->name('pay');
+Route::post('/pay', 'PayInvoiceController@show');
 Route::post('/contact', 'ContactController@store')->name('contact');
 
 Route::middleware('auth')->group(function() {
