@@ -11,6 +11,6 @@ class PayInvoice extends Model
     {
         $invoice = Invoice::find($request['invoiceNo']);
 
-        return $invoice->total() == $request['invVal'] ? $invoice : false;
+        return is_null($invoice) || $invoice->total() != $request['invVal'] ?  false : $invoice;
     }
 }
