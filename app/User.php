@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough('App\Invoice', 'App\Customer');
     }
+
+    public function quotes()
+    {
+        return $this->hasManyThrough('App\Quote', 'App\Customer');
+    }
 }

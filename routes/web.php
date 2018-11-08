@@ -51,6 +51,10 @@ Route::middleware('auth')->group(function() {
     Route::patch('/invoices/{invoice}', 'InvoiceController@update')->middleware('checkOwner');
     Route::patch('/invoices/{invoice}/lock', 'InvoiceController@update')->middleware('checkOwner');
     Route::post('/invoices/{invoice}/items/create', 'InvoiceItemController@store')->middleware('checkOwner');
+
+    Route::get('/quotes', 'QuoteController@index')->name('quotes');
+    Route::get('/quotes/create', 'QuoteController@create')->name('quotes.create');
+    Route::get('/quotes/{quote}/print', 'QuoteController@print')->name('quote.print')->middleware('checkOwner');
 });
 
 /**

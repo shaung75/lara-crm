@@ -36,6 +36,11 @@ class Customer extends Model
         return $this->hasMany(Invoice::class);
     }
 
+    public function quotes()
+    {
+        return $this->hasMany(Quotes::class);
+    }
+
     public function balance()
     {
         $invoices = $this->invoices->where('paid', 0);
