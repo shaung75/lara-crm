@@ -13,7 +13,7 @@
     <div class="col-md-8">
         <div class="card">
             <div class="header">
-                <a href="{{ route('quote.print', $quote->id) }}" class="btn btn-default pull-right">Print Invoice</a>
+                <a href="{{ route('quote.print', $quote->id) }}" class="btn btn-default pull-right">Print Quote</a>
                 <h4 class="title">Quote #{{ $quote->id }}</h4>
                 <p class="category">{{ $quote->customer->company }}</p>
             </div>

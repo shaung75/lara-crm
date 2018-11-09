@@ -29,8 +29,14 @@
                 </li>
                 <li class="@if (Request::is('projects*')) {{'active'}} @endif">
                     <a href="{{ route('projects') }}">
-                        <i class="pe-7s-news-paper"></i>
+                        <i class="pe-7s-folder"></i>
                         <p>Projects</p>
+                    </a>
+                </li>
+                <li class="@if (Request::is('quotes*')) {{'active'}} @endif">
+                    <a href="{{ route('quotes') }}">
+                        <i class="pe-7s-news-paper"></i>
+                        <p>Quotes</p>
                     </a>
                 </li>
                 <li class="@if (Request::is('invoices*')) {{'active'}} @endif">

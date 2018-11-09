@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Invoice;
-use App\InvoiceItem;
+use App\Quote;
+use App\QuoteItem;
 use Illuminate\Http\Request;
 
-class InvoiceItemController extends Controller
+class QuoteItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,16 +34,16 @@ class InvoiceItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Invoice $invoice)
+    public function store(Request $request, Quote $quote)
     {
         $atts = request()->validate([
             'lineItem' => 'required',
             'qty' => 'required',
             'amount' => 'required'
         ]);
-        $atts['invoice_id'] = $invoice->id;
+        $atts['quote_id'] = $quote->id;
 
-        InvoiceItem::create($atts);
+        QuoteItem::create($atts);
 
         return back();
     }
@@ -51,10 +51,10 @@ class InvoiceItemController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\InvoiceItem  $invoiceItem
+     * @param  \App\QuoteItem  $quoteItem
      * @return \Illuminate\Http\Response
      */
-    public function show(InvoiceItem $invoiceItem)
+    public function show(QuoteItem $quoteItem)
     {
         //
     }
@@ -62,10 +62,10 @@ class InvoiceItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\InvoiceItem  $invoiceItem
+     * @param  \App\QuoteItem  $quoteItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(InvoiceItem $invoiceItem)
+    public function edit(QuoteItem $quoteItem)
     {
         //
     }
@@ -74,10 +74,10 @@ class InvoiceItemController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\InvoiceItem  $invoiceItem
+     * @param  \App\QuoteItem  $quoteItem
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, InvoiceItem $invoiceItem)
+    public function update(Request $request, QuoteItem $quoteItem)
     {
         //
     }
@@ -85,10 +85,10 @@ class InvoiceItemController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\InvoiceItem  $invoiceItem
+     * @param  \App\QuoteItem  $quoteItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(InvoiceItem $invoiceItem)
+    public function destroy(QuoteItem $quoteItem)
     {
         //
     }

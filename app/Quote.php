@@ -16,9 +16,13 @@ class Quote extends Model
         return $this->belongsTo(Customer::class);
     }
 
+    public function items()
+    {
+        return $this->hasMany(QuoteItem::class);
+    }
+
     public function total()
     {
-        /*
         $items = $this->items;
         $total = 0;
 
@@ -26,8 +30,7 @@ class Quote extends Model
         {
             $total += $item->total();
         }
-        */
-        return 10;
+        
         return $total;
     }
 }

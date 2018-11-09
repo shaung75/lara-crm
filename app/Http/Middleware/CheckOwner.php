@@ -45,6 +45,19 @@ class CheckOwner
                     return redirect()->route('invoices');
                 }
             }
+
+            /**
+             * Check owner of Quote
+             */
+            if($request->route('quote'))
+            {
+                $owner = \App\Quote::find($request->route('quote')->id);
+
+                if($user_id != $owner->customer->user->id)
+                {
+                    return redirect()->route('quotes');
+                }
+            }
             
             /**
              * Check owner of Customer
