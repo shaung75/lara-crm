@@ -60,6 +60,17 @@ class QuoteController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Invoice  $invoice
+     * @return \Illuminate\Http\Response
+     */
+    public function print(Quote $quote)
+    {
+        return view('dashboard.quotes.print', compact('quote'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\quotes  $quotes
