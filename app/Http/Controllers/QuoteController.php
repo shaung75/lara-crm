@@ -103,4 +103,11 @@ class QuoteController extends Controller
     {
         //
     }
+
+    public function makeInvoice(Quote $quote)
+    {
+        $invoice = $quote->makeInvoice();
+
+        return redirect()->route('invoice', ['id' => $invoice->id]);
+    }
 }

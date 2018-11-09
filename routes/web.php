@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/quotes/{quote}/print', 'QuoteController@print')->name('quote.print')->middleware('checkOwner');
     Route::post('/quotes', 'QuoteController@store');
     Route::post('/quotes/{quote}/items/create', 'QuoteItemController@store')->middleware('checkOwner');
+    Route::post('/quotes/{quote}/invoice', 'QuoteController@makeInvoice')->name('makeinvoice')->middleware('checkOwner');
 });
 
 /**

@@ -82,6 +82,12 @@
 
                 <hr>
 
+                <form method="POST" action="{{ route('makeinvoice', $quote->id)}}">
+                    @csrf
+
+                    <button type="submit" class="btn btn-default" onclick="return confirm('Are you sure?')">Convert to Invoice</button>
+                </form>
+
             </div>
         </div>
     </div>
