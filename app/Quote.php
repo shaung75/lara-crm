@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quote extends Model
 {
+    protected $fillable = [
+        'customer_id',
+        'invoice_id',
+    ];
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);

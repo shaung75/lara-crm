@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\quotes;
+use App\Quote;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -27,7 +27,10 @@ class QuoteController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+        $customers = $user->customer;
+
+        return view('dashboard.quotes.create', compact('user', 'customers'));
     }
 
     /**
@@ -38,7 +41,11 @@ class QuoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $quote = Quote::create(request()->validate([
+            'customer_id' => 'required'
+        ]));
+        
+        return redirect()->route('quote', ['id' => $quote->id]);
     }
 
     /**
@@ -47,9 +54,9 @@ class QuoteController extends Controller
      * @param  \App\quotes  $quotes
      * @return \Illuminate\Http\Response
      */
-    public function show(quotes $quotes)
+    public function show(Quote $quote)
     {
-        //
+        return view('dashboard.quotes.show', compact('quote'));
     }
 
     /**
@@ -58,7 +65,7 @@ class QuoteController extends Controller
      * @param  \App\quotes  $quotes
      * @return \Illuminate\Http\Response
      */
-    public function edit(quotes $quotes)
+    public function edit(Quote $quote)
     {
         //
     }
@@ -70,7 +77,7 @@ class QuoteController extends Controller
      * @param  \App\quotes  $quotes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, quotes $quotes)
+    public function update(Request $request, Quote $quote)
     {
         //
     }
@@ -81,7 +88,7 @@ class QuoteController extends Controller
      * @param  \App\quotes  $quotes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(quotes $quotes)
+    public function destroy(Quote $quote)
     {
         //
     }
