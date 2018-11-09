@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Invoice;
+use App\Quote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -103,5 +104,21 @@ class CustomerController extends Controller
         $invoice->save();
         
         return redirect()->route('invoice', ['id' => $invoice->id]);
+    }
+
+    public function quotes (Request $request, Customer $customer)
+    {
+        return view('dashboard.customers.quotes.show', compact('customer', 'route'));
+    }
+
+    public function quotesCreate (Customer $customer)
+    {
+        $quote = new Quote;
+
+        $quote->customer_id = $customer->id;
+
+        $quote->save();
+        
+        return redirect()->route('quote', ['id' => $quote->id]);
     }
 }

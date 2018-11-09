@@ -26,10 +26,12 @@ Route::middleware('auth')->group(function() {
     Route::get('/customers', 'CustomerController@index')->name('customers');
     Route::post('/customers', 'CustomerController@store');
     Route::get('/customers/create', 'CustomerController@create')->name('customers.create');
-    Route::get('/customers/{customer}', 'CustomerController@show')->name('customer')->middleware('checkOwner');
-    Route::patch('/customers/{customer}', 'CustomerController@update')->middleware('checkOwner');
+    Route::get('/customers/{customer}', 'CustomerController@show')->middleware('checkOwner');
+    Route::patch('/customers/{customer}', 'CustomerController@update')->name('customer')->middleware('checkOwner');
     Route::get('/customers/{customer}/edit', 'CustomerController@edit')->name('customers.update')->middleware('checkOwner');
     Route::get('/customers/{customer}/invoices', 'CustomerController@invoices')->name('customers.invoices')->middleware('checkOwner');
+    Route::get('/customers/{customer}/quotes', 'CustomerController@quotes')->name('customers.quotes')->middleware('checkOwner');
+    Route::get('/customers/{customer}/quotes/create', 'CustomerController@quotesCreate')->name('customers.quotes.create')->middleware('checkOwner');
     Route::get('/customers/{customer}/invoices/unpaid', 'CustomerController@invoices')->name('customers.invoices.unpaid')->middleware('checkOwner');
     Route::get('/customers/{customer}/invoices/create', 'CustomerController@invoicesCreate')->name('customers.invoices.create')->middleware('checkOwner');
 

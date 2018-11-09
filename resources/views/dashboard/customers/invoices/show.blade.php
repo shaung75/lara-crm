@@ -5,7 +5,7 @@
 <p class="small">
     <a href="{{ route('dashboard') }}">Dashboard</a> | 
     <a href="{{ route('customers') }}">Customers</a> | 
-    <a href="{{ $customer->id }}">{{ $customer->company }}</a> |
+    <a href="{{ route('customer', $customer->id) }}">{{ $customer->company }}</a> |
     Invoices
 </p>
 
@@ -83,6 +83,7 @@
         <div class="card">
             <div class="header">
                 <a href="{{ route('customers.invoices', $customer->id) }}" class="btn btn-default pull-right">Invoices</a>
+                <a href="{{ route('customers.quotes', $customer->id) }}" class="btn btn-default pull-right">Quotes</a>
                 <h4 class="title" style="line-height: 2.2em">Account Balance: &pound;{{ number_format($customer->balance(), 2, '.', ',') }}</h4>
             </div>
         </div>

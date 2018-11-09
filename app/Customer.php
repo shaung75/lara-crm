@@ -38,7 +38,7 @@ class Customer extends Model
 
     public function quotes()
     {
-        return $this->hasMany(Quotes::class);
+        return $this->hasMany(Quote::class);
     }
 
     public function balance()
