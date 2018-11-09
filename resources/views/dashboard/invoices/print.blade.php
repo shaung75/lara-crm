@@ -16,7 +16,7 @@
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="http://www.shaungill.co.uk/wp-content/uploads/2014/08/logo.png" style="width:100%; max-width:300px;">
+                                <img src="/img/shaun-gill-logo.png" style="width:100%; max-width:300px;">
                             </td>
                             
                             <td style="text-align: right">
