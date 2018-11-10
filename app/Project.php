@@ -11,8 +11,14 @@ class Project extends Model
         'name',
         'description',
     ];
+    
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
     }
 }
