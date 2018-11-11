@@ -66,4 +66,9 @@ class Customer extends Model
 
         return $value;
     }
+
+    public function tasks()
+    {
+        return $this->hasManyThrough('App\Task', 'App\Project');
+    }
 }

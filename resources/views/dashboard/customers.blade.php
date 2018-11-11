@@ -29,6 +29,7 @@
                     <thead>
                         <th>Account</th>
                         <th>Comany</th>
+                        <th class="text-center">Open Tasks</th>
                         <th>Contact</th>
                     </thead>
                     <tbody>
@@ -37,6 +38,7 @@
                             <tr>
                                 <td><a href="/customers/{{ $customer->id }}">#{{ $customer->id }}</a></td>
                                 <td><a href="/customers/{{ $customer->id }}">{{ $customer->company }}</a></td>
+                                <td class="text-center">{{ $customer->tasks->where('completed', 0)->count() }}</td>
                                 <td>{{ $customer->firstname }} {{ $customer->lastname }}</td>
                             </tr>
                         @endforeach

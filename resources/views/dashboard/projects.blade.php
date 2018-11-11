@@ -31,6 +31,7 @@
                         <th>ID</th>
                         <th>Project Name</th>
                         <th>Customer</th>
+                        <th class="text-center">Open Tasks</th>
                         <th></th>
                     </thead>
                     <tbody>
@@ -40,6 +41,7 @@
                                 <td><a href="/projects/{{ $project->id }}">#{{ $project->id }}</a></td>
                                 <td><a href="/projects/{{ $project->id }}">{{ $project->name }}</a></td>
                                 <td><a href="/customers/{{ $project->customer->id}}">{{ $project->customer->company }}</a></td>
+                                <td class="text-center">{{ $project->tasks->where('completed', 0)->count() }}</td>
                                 <td>
                                     <form method="POST" action="{{ route('project.delete', $project->id) }}">
                                         @csrf

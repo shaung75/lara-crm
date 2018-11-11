@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Project;
-use App\User;
+use App\Task;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ProjectController extends Controller
+class ProjectTasksController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-
-        return view('dashboard.projects', compact('user'));
+        //
     }
 
     /**
@@ -26,12 +23,9 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Project $project)
     {
-        $user = Auth::user();
-        $customers = $user->customer;
-
-        return view('dashboard.projects.create', compact('user', 'customers'));
+        return view('dashboard.projects.tasks.create', compact('project'));
     }
 
     /**
@@ -40,15 +34,14 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Project $project)
     {
         $atts = request()->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'customer_id' => 'required'
+            'title' => 'required',
         ]);
+        $atts['project_id'] = $project->id;
         
-        $project = Project::create($atts);
+        $task = Task::create($atts);
 
         return redirect()->route('project', ['id' => $project->id]);
     }
@@ -56,49 +49,62 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Project  $project
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show($id)
     {
-        return view('dashboard.projects.show', compact('project'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Project  $project
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(Project $project, Task $task)
     {
-        //
+        return view('dashboard.projects.tasks.edit', compact('project', 'task'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Project  $project
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Project $project, Task $task)
     {
-        //
+        if(request()->has('title'))
+        {
+            $task->update([
+                'title' => request()->title
+            ]);
+        }
+        if(request()->has('notes'))
+        {
+            $task->update([
+                'notes' => request()->notes
+            ]);
+        }
+        
+        $task->update([
+            'completed' => request()->has('completed')
+        ]);
+        
+        return redirect()->route('project', ['id' => $project->id]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Project  $project
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy($id)
     {
-        $user = Auth::user();
-
-        $project->delete();
-        
-        return back();
+        //
     }
 }

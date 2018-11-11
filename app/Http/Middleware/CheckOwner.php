@@ -68,6 +68,17 @@ class CheckOwner
                     return redirect()->route('customers');
                 }
             }
+
+            /**
+             * Check owner of task
+             */
+            if($request->route('task'))
+            {
+                if($user_id != $request->route('task')->project->customer->user->id)
+                {
+                    return back();
+                }
+            }
         }
         return $next($request);
     }

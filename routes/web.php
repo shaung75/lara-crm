@@ -44,6 +44,11 @@ Route::middleware('auth')->group(function() {
     Route::get('/projects/{project}', 'ProjectController@show')->name('project')->middleware('checkOwner');  
     Route::delete('/projects/{project}', 'ProjectController@destroy')->name('project.delete')->middleware('checkOwner');
 
+    Route::get('/projects/{project}/tasks/create', 'ProjectTasksController@create')->name('project.tasks.create')->middleware('checkOwner');
+    Route::get('/projects/{project}/tasks/{task}/edit', 'ProjectTasksController@edit')->name('task.edit')->middleware('checkOwner');
+    Route::patch('/projects/{project}/tasks/{task}', 'ProjectTasksController@update')->name('task.update')->middleware('checkOwner');
+    Route::post('/projects/{project}/tasks', 'ProjectTasksController@store')->middleware('checkOwner');
+
     Route::get('/invoices', 'InvoiceController@index')->name('invoices');
     Route::get('/invoices/unpaid', 'InvoiceController@index')->name('invoices.unpaid');
     Route::post('/invoices', 'InvoiceController@store');
@@ -62,6 +67,9 @@ Route::middleware('auth')->group(function() {
     Route::post('/quotes', 'QuoteController@store');
     Route::post('/quotes/{quote}/items/create', 'QuoteItemController@store')->middleware('checkOwner');
     Route::post('/quotes/{quote}/invoice', 'QuoteController@makeInvoice')->name('makeinvoice')->middleware('checkOwner');
+
+    Route::get('/tasks/{task}', 'TaskController@index')->name('task')->middleware('checkOwner');
+    Route::delete('/tasks/{task}', 'TaskController@destroy')->name('task.delete')->middleware('checkOwner');
 });
 
 /**
