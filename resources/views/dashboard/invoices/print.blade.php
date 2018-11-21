@@ -57,6 +57,16 @@
                                         <td>DUE</td>
                                         <td>{{ $invoice->created_at->addDays(14)->format('d/m/Y') }}</td>
                                     </tr>
+                                    
+                                    @if($invoice->purchase_order)
+
+                                    <tr>
+                                        <td>ORDER</td>
+                                        <td>{{ $invoice->purchase_order }}</td>
+                                    </tr>
+
+                                    @endif
+
                                 </table>
                             </td>
                         </tr>

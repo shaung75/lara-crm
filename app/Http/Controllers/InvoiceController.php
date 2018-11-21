@@ -51,7 +51,8 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $invoice = Invoice::create(request()->validate([
-            'customer_id' => 'required'
+            'customer_id' => 'required',
+            'purchase_order' => 'nullable'
         ]));
         
         return redirect()->route('invoice', ['id' => $invoice->id]);
@@ -104,10 +105,17 @@ class InvoiceController extends Controller
             $invoice->update([
                 'paid' => request()->has('paid')
             ]);
-        } elseif($request->updateType == 'lock')
+        }
+        elseif($request->updateType == 'lock')
         {
             $invoice->update([
                 'locked' => request()->locked
+            ]);
+        }
+        elseif($request->updateType == 'po')
+        {
+            $invoice->update([
+                'purchase_order' => request()->purchase_order
             ]);
         }
 

@@ -19,7 +19,18 @@
             </div>
 
             <div class="content">
+                
                 <p>Date: <span class="category">{{ $invoice->created_at->format('d-m-Y') }}</span></p>
+                <form method="POST" action="/invoices/{{ $invoice->id }}">
+                    @method('PATCH')
+                    @csrf
+                    <p style="display: inline-block;">Purchase Order:</p> 
+                    <input type="hidden" name="updateType" value="po">
+                    <input type="text" name="purchase_order" value="{{ $invoice->purchase_order }}">
+
+                    <button type="submit" class="btn btn-default" >Update</button>
+                </form> 
+
                 @if($invoice->items->count())
                     <table class="table table-hover table-striped">
                         <thead>

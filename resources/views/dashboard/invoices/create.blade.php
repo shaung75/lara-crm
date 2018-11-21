@@ -43,6 +43,12 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="purchase_order">Purchase Order</label>
+                                <input type="text" class="form-control" name="purchase_order" placeholder="Purchase Order" value="{{ old('purchase_order') }}">
+                            </div>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-info btn-fill pull-right">Add Invoice</button>

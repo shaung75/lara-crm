@@ -10,6 +10,7 @@ class Invoice extends Model
         'customer_id',
         'locked',
         'paid',
+        'purchase_order',
     ];
     
     public function customer()
