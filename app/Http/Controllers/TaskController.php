@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -14,7 +16,11 @@ class TaskController extends Controller
      */
     public function index(Task $task)
     {
-        //
+        $user = Auth::user();
+
+        $tasks = $user->tasks();
+
+        return view('dashboard.tasks', compact('tasks', 'user'));
     }
 
     /**

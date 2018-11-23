@@ -95,7 +95,6 @@ class ProjectTasksController extends Controller
         ]);
         
         return back();
-        //return redirect()->route('project', ['id' => $project->id]);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -46,5 +47,17 @@ class User extends Authenticatable
     public function quotes()
     {
         return $this->hasManyThrough('App\Quote', 'App\Customer');
+    }
+
+    public function tasks()
+    {
+        $tasks = DB::table('tasks')
+                    ->join('projects', 'tasks.project_id', '=', 'projects.id')
+                    ->join('customers', 'projects.customer_id', '=', 'customers.id')
+                    ->join('users', 'customers.user_id', '=', 'users.id')
+                    ->select('tasks.*')
+                    ->where('user_id', '=', $this->id)
+                    ->get();
+        return $tasks;
     }
 }

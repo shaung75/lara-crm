@@ -33,6 +33,12 @@
                         <p>Projects</p>
                     </a>
                 </li>
+                <li class="@if (Request::is('tasks*')) {{'active'}} @endif">
+                    <a href="{{ route('task') }}">
+                        <i class="pe-7s-folder"></i>
+                        <p>Tasks</p>
+                    </a>
+                </li>
                 <li class="@if (Request::is('quotes*')) {{'active'}} @endif">
                     <a href="{{ route('quotes') }}">
                         <i class="pe-7s-news-paper"></i>

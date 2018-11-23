@@ -68,7 +68,8 @@ Route::middleware('auth')->group(function() {
     Route::post('/quotes/{quote}/items/create', 'QuoteItemController@store')->middleware('checkOwner');
     Route::post('/quotes/{quote}/invoice', 'QuoteController@makeInvoice')->name('makeinvoice')->middleware('checkOwner');
 
-    Route::get('/tasks/{task}', 'TaskController@index')->name('task')->middleware('checkOwner');
+    Route::get('/tasks', 'TaskController@index')->name('task');
+    //Route::get('/tasks/{task}', 'TaskController@index')->name('task')->middleware('checkOwner');
     Route::delete('/tasks/{task}', 'TaskController@destroy')->name('task.delete')->middleware('checkOwner');
 });
 
