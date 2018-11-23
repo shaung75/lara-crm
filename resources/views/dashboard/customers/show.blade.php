@@ -29,7 +29,7 @@
                                 <tr>
                                     <td><a href="/projects/{{ $project->id }}">#{{ $project->id }}</a></td>
                                     <td><a href="/projects/{{ $project->id }}">{{ $project->name }}</a></td>
-                                    <td class="text-center">{{ $customer->tasks->where('completed', 0)->count() }}</td>
+                                    <td class="text-center">{{ $project->tasks->where('completed', 0)->count() }}</td>
                                     <td>
                                         <form method="POST" action="{{ route('project.delete', $project->id) }}">
                                             @csrf
