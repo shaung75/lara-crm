@@ -94,7 +94,8 @@ class ProjectTasksController extends Controller
             'completed' => request()->has('completed')
         ]);
         
-        return redirect()->route('project', ['id' => $project->id]);
+        return back();
+        //return redirect()->route('project', ['id' => $project->id]);
     }
 
     /**

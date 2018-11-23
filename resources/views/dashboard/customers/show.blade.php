@@ -48,6 +48,61 @@
             <div class="alert alert-danger">{{ $customer->company }} has no projects!</div>
             <p><a href="/customers/{{ $customer->id }}/projects/create" class="btn btn-default">Add a Project</a></p>
         @endif
+
+        @if ($customer->tasks->count())
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Tasks</h4>
+                    <p class="category">All task</p>
+                </div>
+                <div class="content table-responsive table-full-width">
+                    <table class="table">
+                        <thead>
+                            <th></th>
+                            <th>Task</th>
+                            <th>Project</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+
+                            @foreach($customer->tasks->sortBy('completed') as $task)
+                                <tr>
+                                    <td style="width: 20px;">
+                                        <form method="POST" action="{{ route('task.update', [$task->project->id, $task->id]) }}">
+                                            @csrf
+                                            @method('PATCH')
+
+                                            <div class="checkbox">
+                                                <input id="checkbox{{ $task->id }}" type="checkbox" name="completed" {{ $task->completed ? 'checked' : '' }} onChange="this.form.submit()">
+                                                <label for="checkbox{{ $task->id }}"></label>
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('task.edit', [$task->project->id, $task->id]) }}">{{ $task->title }}</a>
+                                    </td>
+                                    <td>
+                                        {{ $task->project->name }}
+                                    </td>
+                                    <td class="td-actions text-right">
+                                        <form method="POST" action="{{ route('task.delete', $task->id) }}" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        @else
+
+        @endif
     </div>
     <div class="col-md-4">
         <div class="card">
