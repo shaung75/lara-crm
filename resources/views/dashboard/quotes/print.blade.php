@@ -117,10 +117,14 @@
                     </td>
                     
                     <td>
-                        {{ $item->qty }}
+                        @if($item->qty)
+                            {{ $item->qty }}
+                        @endif
                     </td>
                     <td>
-                        &pound;{{ number_format($item->amount, 2, '.', ',') }}
+                        @if($item->qty)
+                            &pound;{{ number_format($item->amount, 2, '.', ',') }}
+                        @endif
                     </td>
                 </tr>
             @endforeach
