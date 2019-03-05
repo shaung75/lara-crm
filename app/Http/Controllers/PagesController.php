@@ -22,7 +22,9 @@ class PagesController extends Controller
     {
         for($i=0; $i<12; $i++)
         {
-            $invoices = Invoice::where( DB::raw('MONTH(created_at)'), '=', date('n')-$i )->get();
+            $m = (date('n')-$i) < 1 ? (date('n')-$i) + 12 : date('n')-$i;
+
+            $invoices = Invoice::where( DB::raw('MONTH(created_at)'), '=', $m )->get();
 
             $invoice_month_total[$i] = 0;
 
