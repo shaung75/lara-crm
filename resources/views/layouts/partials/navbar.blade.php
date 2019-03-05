@@ -44,7 +44,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                   <a href="">
+                   <a href="{{ route('account') }}">
                        <p>Account</p>
                     </a>
                 </li>

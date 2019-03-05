@@ -71,6 +71,9 @@ Route::middleware('auth')->group(function() {
     Route::get('/tasks', 'TaskController@index')->name('task');
     //Route::get('/tasks/{task}', 'TaskController@index')->name('task')->middleware('checkOwner');
     Route::delete('/tasks/{task}', 'TaskController@destroy')->name('task.delete')->middleware('checkOwner');
+
+    Route::get('/user', 'UserController@index')->middleware('auth')->name('account');
+    Route::patch('/user', 'UserController@update')->middleware('auth');
 });
 
 /**
