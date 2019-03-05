@@ -17,12 +17,12 @@
     <script src="/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
 
     <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-    <script src="/js/demo.js"></script>
+    <!--<script src="/js/demo.js"></script>-->
 
     <script type="text/javascript">
         $(document).ready(function(){
 
-            demo.initChartist();
+            //demo.initChartist();
             /*
             $.notify({
                 icon: 'pe-7s-gift',
@@ -35,5 +35,7 @@
             */
         });
     </script>
+
+@yield('scripts')
 
 </html>

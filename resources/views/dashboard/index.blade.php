@@ -58,7 +58,7 @@
     <div class="col-md-6">
         <div class="card ">
             <div class="header">
-                <h4 class="title">2014 Sales</h4>
+                <h4 class="title">Previous 12 Months Sales / Expenses</h4>
                 <p class="category">All products including Taxes</p>
             </div>
             <div class="content">
@@ -66,12 +66,12 @@
 
                 <div class="footer">
                     <div class="legend">
-                        <i class="fa fa-circle text-info"></i> Tesla Model S
-                        <i class="fa fa-circle text-danger"></i> BMW 5 Series
+                        <i class="fa fa-circle text-info"></i> Sales
+                        <i class="fa fa-circle text-danger"></i> Expenses
                     </div>
                     <hr>
                     <div class="stats">
-                        <i class="fa fa-check"></i> Data information certified
+                        <i class="fa fa-check"></i> Accurate as can be
                     </div>
                 </div>
             </div>
@@ -205,5 +205,46 @@
         </div>
     </div>
 </div>
+
+@endsection
+
+@section('scripts')
+
+<script>
+    $(document).ready(function(){
+
+        var data = {
+          //labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          labels: [ @for ($i = 1; $i <= 12; $i++)'{{ date("M", mktime(0, 0, 0, now()->month +$i, 1)) }}',@endfor ],
+          series: [
+            //[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
+            //[412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]
+            [@foreach ($invoice_month_total as $month){{ $month }},@endforeach]
+            ]
+        };
+
+        var options = {
+            seriesBarDistance: 10,
+            axisX: {
+                showGrid: false
+            },
+            height: "245px"
+        };
+
+        var responsiveOptions = [
+          ['screen and (max-width: 640px)', {
+            seriesBarDistance: 5,
+            axisX: {
+              labelInterpolationFnc: function (value) {
+                return value[0];
+              }
+            }
+          }]
+        ];
+
+        Chartist.Bar('#chartActivity', data, options, responsiveOptions);
+    });
+
+</script>
 
 @endsection

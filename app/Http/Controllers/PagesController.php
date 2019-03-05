@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use App\Invoice;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -18,7 +20,21 @@ class PagesController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        for($i=0; $i<12; $i++)
+        {
+            $invoices = Invoice::where( DB::raw('MONTH(created_at)'), '=', date('n')-$i )->get();
+
+            $invoice_month_total[$i] = 0;
+
+            foreach($invoices as $invoice)
+            {
+                $invoice_month_total[$i] += $invoice->total();
+            }
+        }
+
+        $invoice_month_total = array_reverse($invoice_month_total);
+
+        return view('dashboard.index')->with(compact('invoice_month_total'));
     }
 
     public function home()
