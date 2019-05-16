@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>{{ $invoice->customer->company }}</title>
+    <title>{{ $invoice->id }}-{{ $invoice->customer->company }}</title>
     
     <link href="/css/invoice.css" rel="stylesheet" />
 
