@@ -73,6 +73,19 @@
         form.submit();
       }
     </script>
+    
+    <script type="text/javascript" id="cookieinfo"
+      src="//cookieinfoscript.com/js/cookieinfo.min.js"
+      data-bg="#ff9900"
+      data-fg="#FFFFFF"
+      data-link="#333333"
+      data-cookie="CookieInfoScript"
+      data-text-align="left"
+      data-moreinfo="/privacy"
+      data-divlinkbg="#FFFFFF"
+      data-close-text="Got it!">
+    </script>
+
   </body>
 
 </html>
