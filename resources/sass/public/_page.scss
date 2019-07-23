@@ -1,0 +1,11 @@
+.page {
+    .withBorders {
+        margin: 2em 0;
+        tr {
+            border: 1px solid $primary;
+            td {
+                padding: 1em 2em;
+            }
+        }
+    }
+}

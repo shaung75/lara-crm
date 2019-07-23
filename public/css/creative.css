@@ -241,3 +241,12 @@ header.masthead {
     background-color: #e68a00 !important; }
   .btn-primary:active, .btn-primary:focus {
     box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important; }
+
+.page .withBorders {
+  margin: 2em 0; }
+  .page .withBorders tr {
+    border: 1px solid #FF9900; }
+    .page .withBorders tr td {
+      padding: 1em 2em; }
+
+/*# sourceMappingURL=creative.css.map */
